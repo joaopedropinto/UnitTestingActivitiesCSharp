@@ -16,7 +16,7 @@ public class DetectTextImage
         {
             TextDetections = new List<TextDetection>
                 {
-                    new TextDetection { DetectedText = "Text Example", Confidence = 98.0f, Id = 1, ParentId = 0, Type = TextTypes.WORD }
+                    new TextDetection { DetectedText = "Text Example", Confidence = 99.0f, Id = 1, ParentId = 0, Type = TextTypes.WORD }
                 }
         };
 
@@ -37,7 +37,7 @@ public class DetectTextImage
 
         var fileContent = File.ReadAllText(resultFilePath);
         Assert.Contains("Detected: Text", fileContent);
-        Assert.Contains("Confidence: 98", fileContent);
+        Assert.Contains("Confidence: 99", fileContent);
         Assert.Contains("Id: 1", fileContent);
         Assert.Contains("ParentId: 0", fileContent);
         Assert.Contains("Type: WORD", fileContent);
