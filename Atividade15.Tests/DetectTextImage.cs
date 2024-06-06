@@ -9,14 +9,14 @@ namespace Atividade15.Tests;
 public class DetectTextImage
 {
     [Fact]
-    public async Task DetectTextLabelAsync_ShouldCallDetectTextAsync_AndSaveResultsToFile()
+    public async Task DetectTextLabelAsync_ShouldCallDetectTextAsyncSucesfully_AndSaveResults()
     {
         var rekognitionClient = Substitute.For<IRekognitionClientWrapper>();
         var detectTextResponse = new DetectTextResponse
         {
             TextDetections = new List<TextDetection>
                 {
-                    new TextDetection { DetectedText = "Sample Text", Confidence = 99.0f, Id = 1, ParentId = 0, Type = TextTypes.WORD }
+                    new TextDetection { DetectedText = "Text Example", Confidence = 98.0f, Id = 1, ParentId = 0, Type = TextTypes.WORD }
                 }
         };
 
@@ -33,11 +33,11 @@ public class DetectTextImage
 
         await rekognitionClient.Received(1).DetectTextAsync(Arg.Any<DetectTextRequest>());
 
-        Assert.True(File.Exists(resultFilePath), "O arquivo de resultado não foi gerado.");
+        Assert.True(File.Exists(resultFilePath), "Erro ao gerar arquivo.");
 
         var fileContent = File.ReadAllText(resultFilePath);
         Assert.Contains("Detected: Text", fileContent);
-        Assert.Contains("Confidence: 99", fileContent);
+        Assert.Contains("Confidence: 98", fileContent);
         Assert.Contains("Id: 1", fileContent);
         Assert.Contains("ParentId: 0", fileContent);
         Assert.Contains("Type: WORD", fileContent);
